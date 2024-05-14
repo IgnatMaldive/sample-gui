@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar GUI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex items-center justify-center bg-gray-800 bg-opacity-80">
+    <div class="flex w-11/12 max-w-6xl bg-gray-900 bg-opacity-90 text-white rounded-lg shadow-lg">
+        <!-- Icon-Based Sidebar -->
+        <div id="sidebar" class="flex flex-col items-center w-16 py-4 border-r border-gray-700 transition-all duration-300">
+            <!-- Collapsible Nav Bar -->
+            <button id="toggleBtn" class="text-gray-400 mb-4">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="flex flex-col items-center space-y-4">
+                <button class="text-gray-400"><i class="fas fa-home"></i></button>
+                <button class="text-gray-400"><i class="fas fa-user"></i></button>
+                <button class="text-gray-400"><i class="fas fa-briefcase"></i></button>
+                <button class="text-gray-400"><i class="fas fa-chart-line"></i></button>
+                <button class="text-gray-400"><i class="fas fa-sticky-note"></i></button>
+            </div>
+        </div>
+
+        <!-- Main Calendar Interface -->
+        <div class="flex-1 p-4">
+            <!-- Top Toolbar -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-2">
+                    <button class="text-gray-400"><i class="fas fa-home"></i></button>
+                    <button class="text-gray-400"><i class="fas fa-sync"></i></button>
+                    <button class="text-gray-400"><i class="fas fa-cog"></i></button>
+                </div>
+                <span id="currentDateTime" class="text-gray-400">Thu 25 Jan 16:03</span>
+            </div>
+            <!-- Date Range and View Options -->
+            <div class="flex items-center justify-between mb-4">
+                <span class="font-semibold">January 29 - February 04</span>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-400">Month</button>
+                    <button class="text-gray-400">Week</button>
+                    <button class="text-gray-400">Day</button>
+                    <button class="text-gray-400">Agenda</button>
+                </div>
+            </div>
+            <!-- Week View -->
+            <div class="grid grid-cols-7 gap-2 text-center mb-4">
+                <div class="text-gray-400">29 Mon</div>
+                <div class="text-gray-400">30 Tue</div>
+                <div class="text-gray-400">31 Wed</div>
+                <div class="text-gray-400">01 Thu</div>
+                <div class="text-gray-400">02 Fri</div>
+                <div class="text-gray-400">03 Sat</div>
+                <div class="text-gray-400">04 Sun</div>
+                <!-- Event -->
+                <div class="col-span-7">
+                    <div class="bg-blue-600 rounded-full p-1 mt-2">Going to Warsaw</div>
+                </div>
+            </div>
+            <!-- Notes Display -->
+            <div id="notesDisplay" class="bg-gray-800 bg-opacity-70 rounded-lg p-4">
+                <h2 class="text-lg font-semibold mb-2">Notes</h2>
+                <ul id="notesList" class="space-y-2">
+                    <!-- Notes will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div id="detailsSidebar" class="w-64 p-4 border-l border-gray-700 transition-all duration-300">
+            <!-- Date Picker and Navigation -->
+            <div class="flex items-center justify-between">
+                <button class="text-gray-400"><i class="fas fa-chevron-left"></i></button>
+                <span class="font-semibold text-lg">Pick a date</span>
+                <button class="text-gray-400"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <!-- Calendar View -->
+            <div class="mt-4">
+                <div class="flex items-center justify-between">
+                    <button class="text-gray-400"><i class="fas fa-chevron-left"></i></button>
+                    <span id="currentMonth" class="font-semibold">January 2024</span>
+                    <button class="text-gray-400"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="grid grid-cols-7 gap-2 mt-2 text-center">
+                    <div>Mo</div>
+                    <div>Tu</div>
+                    <div>We</div>
+                    <div>Th</div>
+                    <div>Fr</div>
+                    <div>Sa</div>
+                    <div>Su</div>
+                    <div class="text-gray-500">1</div>
+                    <div class="text-gray-500">2</div>
+                    <div class="text-gray-500">3</div>
+                    <div class="text-gray-500">4</div>
+                    <div class="text-gray-500">5</div>
+                    <div class="text-gray-500">6</div>
+                    <div class="text-gray-500">7</div>
+                    <div>8</div>
+                    <div>9</div>
+                    <div>10</div>
+                    <div>11</div>
+                    <div>12</div>
+                    <div>13</div>
+                    <div>14</div>
+                    <div>15</div>
+                    <div>16</div>
+                    <div>17</div>
+                    <div>18</div>
+                    <div>19</div>
+                    <div>20</div>
+                    <div>21</div>
+                    <div>22</div>
+                    <div>23</div>
+                    <div>24</div>
+                    <div id="selectedDate" class="bg-blue-600 rounded-full">25</div>
+                    <div>26</div>
+                    <div>27</div>
+                    <div>28</div>
+                    <div>29</div>
+                    <div>30</div>
+                    <div>31</div>
+                </div>
+            </div>
+            <!-- Search Bar -->
+            <div class="mt-6">
+                <input type="text" placeholder="Search..." class="w-full p-2 rounded bg-gray-700 text-gray-300">
+            </div>
+            <!-- Lists Section -->
+            <div class="mt-4">
+                <div class="font-semibold">Lists</div>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <span class="mr-2">😀</span>
+                        <span>Personal</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="mr-2">💼</span>
+                        <span>Work</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Insights Section -->
+            <div class="mt-4">
+                <div class="font-semibold">Insights</div>
+            </div>
+            <!-- Notes Section -->
+            <div class="mt-4">
+                <div class="font-semibold">Add Note</div>
+                <textarea id="notes" class="w-full p-2 rounded bg-gray-700 text-gray-300 mt-2" rows="6"
+                    placeholder="Write your notes here..."></textarea>
+                <button id="saveNotes" class="w-full bg-blue-600 text-white p-2 rounded mt-2">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Collapsible Sidebar
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const detailsSidebar = document.getElementById('detailsSidebar');
+
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = sidebar.classList.contains('w-64');
+            sidebar.classList.toggle('w-16', isExpanded);
+            sidebar.classList.toggle('w-64', !isExpanded);
+            detailsSidebar.classList.toggle('hidden', isExpanded);
+            toggleBtn.innerHTML = isExpanded ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-left"></i>';
+        });
+
+        // Update Current Date and Time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const formattedDateTime = now.toLocaleDateString('en-GB', options);
+            document.getElementById('currentDateTime').textContent = formattedDateTime;
+
+            // Update the calendar month and year
+            const monthYearOptions = { month: 'long', year: 'numeric' };
+            document.getElementById('currentMonth').textContent = now.toLocaleDateString('en-GB', monthYearOptions);
+
+            // Highlight the current day in the calendar (if it's the current month)
+            const today = now.getDate();
+            document.getElementById('selectedDate').classList.remove('bg-blue-600');
+            const days = document.querySelectorAll('.grid-cols-7 > div');
+            days.forEach(day => {
+                if (day.textContent == today) {
+                    day.classList.add('bg-blue-600');
+                }
+            });
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Update every minute
+
+        // Notes Functionality
+        const notesTextarea = document.getElementById('notes');
+        const saveNotesBtn = document.getElementById('saveNotes');
+        const notesList = document.getElementById('notesList');
+
+        // Load notes from local storage
+        function loadNotes() {
+            const savedNotes = JSON.parse(localStorage.getItem('calendarNotes')) || [];
+            notesList.innerHTML = '';
+            savedNotes.forEach(note => {
+                const li = document.createElement('li');
+                li.classList.add('bg-gray-700', 'p-2', 'rounded');
+                li.textContent = note;
+                notesList.appendChild(li);
+            });
+        }
+
+        // Save note to local storage
+        saveNotesBtn.addEventListener('click', () => {
+            const note = notesTextarea.value.trim();
+            if (note) {
+                const savedNotes = JSON.parse(localStorage.getItem('calendarNotes')) || [];
+                savedNotes.push(note);
+                localStorage.setItem('calendarNotes', JSON.stringify(savedNotes));
+                notesTextarea.value = '';
+                loadNotes();
+            }
+        });
+
+        loadNotes(); // Load notes on page load
+    </script>
+</body>
+
+</html>
