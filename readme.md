@@ -4,6 +4,8 @@ This project is an interactive calendar application with note-taking functionali
 
 ![Interactive Calendar GUI](your-image-link.jpg)
 
+![Cover image](Screenshot_2024-05-14_16-02-19.jpg)
+
 ## Features
 
 - **Interactive Calendar**: View and navigate through different dates.
